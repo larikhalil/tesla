@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1885 Car Service Centre - Tesla Service Bundles</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --red-primary: #E31E24;
+            --red-dark: #B91C1C;
+            --gold-primary: #D4AF37;
+            --gold-light: #F4E4BC;
+            --gold-dark: #8B6914;
+            --black-bg: #0a0a0a;
+            --black-texture: #111111;
+            --text-light: #ffffff;
+            --text-gray: #cccccc;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', 'Cairo', sans-serif;
+            background-color: var(--black-bg);
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+                linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            min-height: 100vh;
+            color: var(--text-light);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header with Logo */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 2px solid;
+            border-image: linear-gradient(90deg, transparent, var(--gold-primary), transparent) 1;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-container img {
+            height: 80px;
+            width: auto;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-text h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 50%, var(--gold-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .brand-text span {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        /* Language Toggle */
+        .lang-toggle {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
+            border: 1px solid var(--gold-primary);
+            border-radius: 30px;
+            padding: 5px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--gold-primary);
+            padding: 8px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-dark) 100%);
+            color: var(--black-bg);
+        }
+
+        .lang-btn:hover:not(.active) {
+            background: rgba(212, 175, 55, 0.2);
+        }
+
+        /* Calculator Section */
+        .calculator-section {
+            background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-gray);
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .form-field {
+            position: relative;
+        }
+
+        .form-field label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--gold-primary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .form-field input,
+        .form-field select {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+            color: var(--text-light);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .form-field select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23D4AF37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 20px;
+            padding-right: 50px;
+        }
+
+        /* Fix for dropdown options visibility */
+        .form-field select option {
+            background-color: var(--black-bg);
+            color: var(--text-light);
+            padding: 10px;
+        }
+
+        .form-field input:focus,
+        .form-field select:focus {
+            outline: none;
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .form-field input::placeholder {
+            color: #666;
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--red-primary) 0%, var(--red-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calculate-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .calculate-btn:hover::before {
+            left: 100%;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(227, 30, 36, 0.3);
+        }
+
+        /* Results Section */
+        .results-section {
+            display: none;
+        }
+
+        .results-section.active {
+            display: block;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .bracket-info {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
+            border-left: 4px solid var(--gold-primary);
+            border-radius: 0 15px 15px 0;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .bracket-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-dark) 100%);
+            color: var(--black-bg);
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .bracket-info h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--gold-light);
+        }
+
+        .bracket-info p {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .bundles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .bundle-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .bundle-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold-primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(212, 175, 55, 0.1);
+        }
+
+        .bundle-card.recommended {
+            border-color: var(--red-primary);
+            background: linear-gradient(145deg, rgba(227, 30, 36, 0.05) 0%, rgba(227, 30, 36, 0.02) 100%);
+        }
+
+        .bundle-card.best-value {
+            border-color: var(--gold-primary);
+            background: linear-gradient(145deg, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0.03) 100%);
+        }
+
+        .bundle-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 5px 25px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .bundle-badge.recommended {
+            background: var(--red-primary);
+            color: white;
+        }
+
+        .bundle-badge.best-value {
+            background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-dark) 100%);
+            color: var(--black-bg);
+        }
+
+        .bundle-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .bundle-name {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--gold-light);
+        }
+
+        .bundle-period {
+            color: var(--text-gray);
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .bundle-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin: 15px 0;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .bundle-price span {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            font-weight: 400;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 25px 0;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.95rem;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-label {
+            color: var(--text-gray);
+        }
+
+        .feature-value {
+            color: var(--gold-light);
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .whatsapp-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            margin-top: 10px;
+            font-family: inherit;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 40px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .comparison-table th {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold-primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(212, 175, 55, 0.03);
+        }
+
+        .comparison-table .highlight {
+            color: var(--gold-primary);
+            font-weight: 700;
+        }
+
+        /* RTL Support for Arabic */
+        [dir="rtl"] .bracket-info {
+            border-left: none;
+            border-right: 4px solid var(--gold-primary);
+            border-radius: 15px 0 0 15px;
+            text-align: right;
+        }
+
+        [dir="rtl"] .feature-list li {
+            flex-direction: row-reverse;
+        }
+
+        [dir="rtl"] .feature-value {
+            text-align: left;
+        }
+
+        [dir="rtl"] .logo-container {
+            flex-direction: row-reverse;
+        }
+
+        [dir="rtl"] header {
+            flex-direction: row-reverse;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo-container {
+                flex-direction: column;
+            }
+            
+            .controls {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            [dir="rtl"] header,
+            [dir="rtl"] .logo-container {
+                flex-direction: column;
+            }
+            
+            .bundle-price {
+                font-size: 2.2rem;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img src="LOGO.png" alt="1885 Car Service Centre Logo">
+                <div class="brand-text">
+                    <h1 data-en="1885 CAR SERVICE" data-ar="١٨٨٥ كار سيرفيس">1885 CAR SERVICE</h1>
+                    <span data-en="CENTRE" data-ar="سنتر">CENTRE</span>
+                </div>
+            </div>
+            <div class="controls">
+                <div class="lang-toggle">
+                    <button class="lang-btn active" onclick="setLanguage('en')">English</button>
+                    <button class="lang-btn" onclick="setLanguage('ar')">العربية</button>
+                </div>
+            </div>
+        </header>
+
+        <section class="calculator-section">
+            <h2 class="section-title" data-en="Tesla Service Bundle Calculator" data-ar="حاسبة باقات خدمة تسلا">Tesla Service Bundle Calculator</h2>
+            <p class="section-subtitle" data-en="Enter your vehicle details to find the perfect maintenance package" data-ar="أدخل تفاصيل سيارتك للعثور على باقة الصيانة المثالية">Enter your vehicle details to find the perfect maintenance package</p>
+            
+            <div class="input-group">
+                <div class="form-field">
+                    <label data-en="Current Mileage (km)" data-ar="المسافة الحالية (كم)">Current Mileage (km)</label>
+                    <input type="number" id="currentMileage" placeholder="e.g. 45000" min="0" max="200000">
+                </div>
+                <div class="form-field">
+                    <label data-en="Tesla Model" data-ar="موديل تسلا">Tesla Model</label>
+                    <select id="teslaModel">
+                        <option value="Model S" data-en="Model S" data-ar="موديل S">Model S</option>
+                        <option value="Model 3" data-en="Model 3" data-ar="موديل 3">Model 3</option>
+                        <option value="Model X" data-en="Model X" data-ar="موديل X">Model X</option>
+                        <option value="Model Y" data-en="Model Y" data-ar="موديل Y">Model Y</option>
+                        <option value="Cybertruck" data-en="Cybertruck" data-ar="سايبرترك">Cybertruck</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label data-en="Year" data-ar="السنة">Year</label>
+                    <select id="carYear">
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                        <option value="2019">2019</option>
+                        <option value="2018">2018</option>
+                        <option value="2017">2017</option>
+                        <option value="2016">2016</option>
+                        <option value="2015">2015</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button class="calculate-btn" onclick="calculateBundle()" data-en="Calculate Bundle" data-ar="احسب الباقة">Calculate Bundle</button>
+        </section>
+
+        <section class="results-section" id="results">
+            <div class="bracket-info" id="bracketInfo">
+                <span class="bracket-badge" data-en="Your Mileage Bracket" data-ar="فئة المسافة الخاصة بك">Your Mileage Bracket</span>
+                <h2 id="bracketTitle">Below 20,000 km</h2>
+                <p id="bracketDescription"></p>
+            </div>
+
+            <h2 style="margin-bottom: 25px; text-align: center; font-size: 1.8rem; color: var(--gold-light);" data-en="Available Service Bundles" data-ar="باقات الخدمة المتاحة">Available Service Bundles</h2>
+            
+            <div class="bundles-grid" id="bundlesContainer"></div>
+
+            <table class="comparison-table" id="comparisonTable">
+                <thead>
+                    <tr id="tableHeader">
+                        <th data-en="Feature" data-ar="الميزة">Feature</th>
+                    </tr>
+                </thead>
+                <tbody id="comparisonBody"></tbody>
+            </table>
+        </section>
+    </div>
+
+    <script>
+        // Bundle data from the document
+        const bundleData = {
+            'below20k': {
+                name: { en: 'Below 20,000 km', ar: 'أقل من ٢٠,٠٠٠ كم' },
+                bundles: [
+                    {
+                        id: 1,
+                        name: { en: 'Bundle 1', ar: 'الباقة ١' },
+                        period: { en: '1 Year', ar: 'سنة واحدة' },
+                        price: 4000,
+                        mileage: { en: 'Unlimited (Open)', ar: 'غير محدود (مفتوح)' },
+                        coverage: { en: 'Bumper to bumper', ar: 'شامل (من الأمام للخلف)' },
+                        maxDistance: { en: '25,000 km + Current', ar: '٢٥,٠٠٠ كم + الحالي' },
+                        interval: { en: '12,500 km', ar: 'كل ١٢,٥٠٠ كم' },
+                        services: 2
+                    },
+                    {
+                        id: 2,
+                        name: { en: 'Bundle 2', ar: 'الباقة ٢' },
+                        period: { en: '2 Years', ar: 'سنتان' },
+                        price: 7500,
+                        mileage: { en: 'Unlimited (Open)', ar: 'غير محدود (مفتوح)' },
+                        coverage: { en: 'Bumper to bumper', ar: 'شامل (من الأمام للخلف)' },
+                        maxDistance: { en: '37,500 km + Current', ar: '٣٧,٥٠٠ كم + الحالي' },
+                        interval: { en: '12,500 km', ar: 'كل ١٢,٥٠٠ كم' },
+                        services: 3
+                    },
+                    {
+                        id: 3,
+                        name: { en: 'Bundle 3', ar: 'الباقة ٣' },
+                        period: { en: '3 Years', ar: '٣ سنوات' },
+                        price: 10500,
+                        mileage: { en: 'Unlimited (Open)', ar: 'غير محدود (مفتوح)' },
+                        coverage: { en: 'Bumper to bumper', ar: 'شامل (من الأمام للخلف)' },
+                        maxDistance: { en: '62,500 km + Current', ar: '٦٢,٥٠٠ كم + الحالي' },
+                        interval: { en: '12,500 km', ar: 'كل ١٢,٥٠٠ كم' },
+                        services: 5,
+                        bestValue: true
+                    }
+                ]
+            },
+            '20kto85k': {
+                name: { en: '20,000 – 85,000 km', ar: '٢٠,٠٠٠ – ٨٥,٠٠٠ كم' },
+                bundles: [
+                    {
+                        id: 1,
+                        name: { en: 'Bundle 1', ar: 'الباقة ١' },
+                        period: { en: '1 Year', ar: 'سنة واحدة' },
+                        price: 5000,
+                        mileage: { en: 'Unlimited (Open)', ar: 'غير محدود (مفتوح)' },
+                        coverage: { en: 'Bumper to bumper', ar: 'شامل (من الأمام للخلف)' },
+                        maxDistance: { en: '25,000 km + Current', ar: '٢٥,٠٠٠ كم + الحالي' },
+                        interval: { en: '12,500 km', ar: 'كل ١٢,٥٠٠ كم' },
+                        services: 2
+                    },
+                    {
+                        id: 2,
+                        name: { en: 'Bundle 2', ar: 'الباقة ٢' },
+                        period: { en: '2 Years', ar: 'سنتان' },
+                        price: 9000,
+                        mileage: { en: 'Unlimited (Open)', ar: 'غير محدود (مفتوح)' },
+                        coverage: { en: 'Bumper to bumper', ar: 'شامل (من الأمام للخلف)' },
+                        maxDistance: { en: '37,500 km + Current', ar: '٣٧,٥٠٠ كم + الحالي' },
+                        interval: { en: '12,500 km', ar: 'كل ١٢,٥٠٠ كم' },
+                        services: 3
+                    },
+                    {
+                        id: 3,
+                        name: { en: 'Bundle 3', ar: 'الباقة ٣' },
+                        period: { en: '3 Years', ar: '٣ سنوات' },
+                        price: 12000,
+                        mileage: { en: 'Unlimited (Open)', ar: 'غير محدود (مفتوح)' },
+                        coverage: { en: 'Bumper to bumper', ar: 'شامل (من الأمام للخلف)' },
+                        maxDistance: { en: '62,500 km + Current', ar: '٦٢,٥٠٠ كم + الحالي' },
+                        interval: { en: '12,500 km', ar: 'كل ١٢,٥٠٠ كم' },
+                        services: 5,
+                        bestValue: true
+                    }
+                ]
+            },
+            '85kto120k': {
+                name: { en: '85,000 – 120,000 km', ar: '٨٥,٠٠٠ – ١٢٠,٠٠٠ كم' },
+                bundles: [
+                    {
+                        id: 1,
+                        name: { en: 'Bundle 1', ar: 'الباقة ١' },
+                        period: { en: '1 Year', ar: 'سنة واحدة' },
+                        price: 6000,
+                        mileage: { en: 'Unlimited (Open)', ar: 'غير محدود (مفتوح)' },
+                        coverage: { en: 'Bumper to bumper', ar: 'شامل (من الأمام للخلف)' },
+                        maxDistance: { en: '25,000 km + Current', ar: '٢٥,٠٠٠ كم + الحالي' },
+                        interval: { en: '12,500 km', ar: 'كل ١٢,٥٠٠ كم' },
+                        services: 2
+                    },
+                    {
+                        id: 2,
+                        name: { en: 'Bundle 2', ar: 'الباقة ٢' },
+                        period: { en: '2 Years', ar: 'سنتان' },
+                        price: 10000,
+                        mileage: { en: 'Unlimited (Open)', ar: 'غير محدود (مفتوح)' },
+                        coverage: { en: 'Bumper to bumper', ar: 'شامل (من الأمام للخلف)' },
+                        maxDistance: { en: '37,500 km + Current', ar: '٣٧,٥٠٠ كم + الحالي' },
+                        interval: { en: '12,500 km', ar: 'كل ١٢,٥٠٠ كم' },
+                        services: 3,
+                        bestValue: true
+                    }
+                ]
+            },
+            '120kto160k': {
+                name: { en: '120,000 – 160,000 km', ar: '١٢٠,٠٠٠ – ١٦٠,٠٠٠ كم' },
+                bundles: [
+                    {
+                        id: 1,
+                        name: { en: 'Bundle 1', ar: 'الباقة ١' },
+                        period: { en: '1 Year', ar: 'سنة واحدة' },
+                        price: 7500,
+                        mileage: { en: 'Unlimited (Open)', ar: 'غير محدود (مفتوح)' },
+                        coverage: { en: 'Bumper to bumper', ar: 'شامل (من الأمام للخلف)' },
+                        maxDistance: { en: '25,000 km + Current', ar: '٢٥,٠٠٠ كم + الحالي' },
+                        interval: { en: '12,500 km', ar: 'كل ١٢,٥٠٠ كم' },
+                        services: 2,
+                        onlyOption: true
+                    }
+                ]
+            }
+        };
+
+        let currentLang = 'en';
+        let currentMileage = 0;
+        let currentModel = '';
+        let currentYear = '';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            
+            // Update buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes(lang === 'en' ? 'English' : 'العربية')) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Update all elements with data attributes
+            document.querySelectorAll('[data-en]').forEach(el => {
+                el.textContent = el.getAttribute(`data-${lang}`);
+            });
+            
+            // Update dropdown options
+            updateSelectOptions();
+            
+            // Refresh results if visible
+            if (document.getElementById('results').classList.contains('active')) {
+                calculateBundle();
+            }
+        }
+
+        function updateSelectOptions() {
+            const modelSelect = document.getElementById('teslaModel');
+            const yearSelect = document.getElementById('carYear');
+            
+            // Save current values
+            const currentModelVal = modelSelect.value;
+            const currentYearVal = yearSelect.value;
+            
+            // Update model options
+            Array.from(modelSelect.options).forEach(option => {
+                option.textContent = option.getAttribute(`data-${currentLang}`);
+            });
+            
+            modelSelect.value = currentModelVal;
+            yearSelect.value = currentYearVal;
+        }
+
+        function determineBracket(mileage) {
+            if (mileage < 20000) return 'below20k';
+            if (mileage >= 20000 && mileage < 85000) return '20kto85k';
+            if (mileage >= 85000 && mileage < 120000) return '85kto120k';
+            if (mileage >= 120000 && mileage < 160000) return '120kto160k';
+            return null;
+        }
+
+        function getText(key, obj) {
+            return obj[currentLang] || obj['en'];
+        }
+
+        function calculateBundle() {
+            currentMileage = parseInt(document.getElementById('currentMileage').value);
+            currentModel = document.getElementById('teslaModel').value;
+            currentYear = document.getElementById('carYear').value;
+
+            if (!currentMileage || currentMileage < 0) {
+                alert(currentLang === 'en' ? 'Please enter a valid mileage' : 'الرجاء إدخال مسافة صحيحة');
+                return;
+            }
+
+            const bracketKey = determineBracket(currentMileage);
+            
+            if (!bracketKey) {
+                alert(currentLang === 'en' ? 
+                    'Sorry, no prepaid bundles available for vehicles over 160,000 km. Please contact us for custom options.' : 
+                    'عذراً، لا توجد باقات مسبقة الدفع للسيارات التي تزيد مسافتها عن ١٦٠,٠٠٠ كم. يرجى الاتصال بنا للحصول على خيارات مخصصة.');
+                return;
+            }
+
+            const bracket = bundleData[bracketKey];
+            displayResults(bracket, bracketKey);
+        }
+
+        function displayResults(bracket, bracketKey) {
+            document.getElementById('results').classList.add('active');
+            
+            // Update bracket info
+            document.getElementById('bracketTitle').textContent = getText('name', bracket);
+            const descText = currentLang === 'en' ? 
+                `Based on your current mileage of ${currentMileage.toLocaleString()} km for your ${currentYear} Tesla ${currentModel}, you fall into this service bracket.` :
+                `بناءً على مسافتك الحالية البالغة ${currentMileage.toLocaleString()} كم لسيارتك تسلا ${currentModel} موديل ${currentYear}، أنت في فئة الخدمة هذه.`;
+            document.getElementById('bracketDescription').textContent = descText;
+
+            // Generate bundle cards
+            const container = document.getElementById('bundlesContainer');
+            container.innerHTML = '';
+            
+            bracket.bundles.forEach((bundle, index) => {
+                let cardClass = 'bundle-card';
+                if (bundle.onlyOption) cardClass += ' recommended';
+                if (bundle.bestValue) cardClass += ' best-value';
+                
+                const badgeHtml = bundle.onlyOption ? 
+                    `<div class="bundle-badge recommended" data-en="Only Option" data-ar="الخيار الوحيد">${getText('onlyOption', {en: 'Only Option', ar: 'الخيار الوحيد'})}</div>` :
+                    bundle.bestValue ? 
+                    `<div class="bundle-badge best-value" data-en="Best Value" data-ar="أفضل قيمة">${getText('bestValue', {en: 'Best Value', ar: 'أفضل قيمة'})}</div>` : '';
+                
+                const whatsappMessage = encodeURIComponent(
+                    currentLang === 'en' ?
+                    `Hello 1885 Car Service Centre,\n\nI'm interested in ${bundle.name.en} for my Tesla ${currentModel} (${currentYear}).\nCurrent Mileage: ${currentMileage} km\nPrice: AED ${bundle.price.toLocaleString()}\n\nPlease provide more details.` :
+                    `مرحباً ١٨٨٥ كار سيرفيس سنتر،\n\nأنا مهتم بـ ${bundle.name.ar} لسيارتي تسلا ${currentModel} (${currentYear}).\nالمسافة الحالية: ${currentMileage} كم\nالسعر: ${bundle.price.toLocaleString()} درهم\n\nيرجى تزويدي بالمزيد من التفاصيل.`
+                );
+                
+                const whatsappLink = `https://wa.me/971501187630?text=${whatsappMessage}`;
+                
+                container.innerHTML += `
+                    <div class="${cardClass}">
+                        ${badgeHtml}
+                        <div class="bundle-header">
+                            <div class="bundle-name">${getText('name', bundle)}</div>
+                            <div class="bundle-period">${getText('period', bundle)}</div>
+                            <div class="bundle-price">AED ${bundle.price.toLocaleString()}<span> / ${currentLang === 'en' ? 'total' : 'الإجمالي'}</span></div>
+                        </div>
+                        <ul class="feature-list">
+                            <li>
+                                <span class="feature-label" data-en="Coverage Type" data-ar="نوع التغطية">${currentLang === 'en' ? 'Coverage Type' : 'نوع التغطية'}</span>
+                                <span class="feature-value">${getText('coverage', bundle)}</span>
+                            </li>
+                            <li>
+                                <span class="feature-label" data-en="Mileage" data-ar="المسافة">${currentLang === 'en' ? 'Mileage' : 'المسافة'}</span>
+                                <span class="feature-value">${getText('mileage', bundle)}</span>
+                            </li>
+                            <li>
+                                <span class="feature-label" data-en="Service Interval" data-ar="فاصل الخدمة">${currentLang === 'en' ? 'Service Interval' : 'فاصل الخدمة'}</span>
+                                <span class="feature-value">${getText('interval', bundle)}</span>
+                            </li>
+                            <li>
+                                <span class="feature-label" data-en="Number of Services" data-ar="عدد الخدمات">${currentLang === 'en' ? 'Number of Services' : 'عدد الخدمات'}</span>
+                                <span class="feature-value">${bundle.services}</span>
+                            </li>
+                            <li>
+                                <span class="feature-label" data-en="Max Coverage Distance" data-ar="الحد الأقصى للمسافة">${currentLang === 'en' ? 'Max Coverage Distance' : 'الحد الأقصى للمسافة'}</span>
+                                <span class="feature-value">${getText('maxDistance', bundle)}</span>
+                            </li>
+                        </ul>
+                        <a href="${whatsappLink}" target="_blank" class="whatsapp-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                            </svg>
+                            <span data-en="Select & Contact via WhatsApp" data-ar="اختر واتصل عبر الواتساب">${currentLang === 'en' ? 'Select & Contact via WhatsApp' : 'اختر واتصل عبر الواتساب'}</span>
+                        </a>
+                    </div>
+                `;
+            });
+
+            // Generate comparison table
+            const thead = document.getElementById('tableHeader');
+            thead.innerHTML = `<th data-en="Feature" data-ar="الميزة">${currentLang === 'en' ? 'Feature' : 'الميزة'}</th>`;
+            bracket.bundles.forEach(bundle => {
+                thead.innerHTML += `<th>${getText('name', bundle)}</th>`;
+            });
+
+            const tbody = document.getElementById('comparisonBody');
+            const rows = [
+                { key: 'price', label: { en: 'Total Price', ar: 'السعر الإجمالي' }, format: (v) => `AED ${v.toLocaleString()}` },
+                { key: 'period', label: { en: 'Duration', ar: 'المدة' }, format: (v) => getText('period', v) },
+                { key: 'services', label: { en: 'Services Included', ar: 'الخدمات المشمولة' }, format: (v) => v },
+                { key: 'interval', label: { en: 'Service Interval', ar: 'فاصل الخدمة' }, format: (v) => getText('interval', v) },
+                { key: 'maxDistance', label: { en: 'Max Distance Added', ar: 'الحد الأقصى للمسافة المضافة' }, format: (v) => getText('maxDistance', v) },
+                { key: 'coverage', label: { en: 'Coverage Type', ar: 'نوع التغطية' }, format: (v) => getText('coverage', v) }
+            ];
+
+            tbody.innerHTML = rows.map(row => `
+                <tr>
+                    <td><strong>${getText('label', row)}</strong></td>
+                    ${bracket.bundles.map(b => `<td class="${row.key === 'price' ? 'highlight' : ''}">${row.format(b[row.key])}</td>`).join('')}
+                </tr>
+            `).join('');
+
+            // Smooth scroll
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Initialize
+        document.getElementById('currentMileage').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') calculateBundle();
+        });
+
+        // Set initial language
+        setLanguage('en');
+    </script>
+</body>
+</html>
