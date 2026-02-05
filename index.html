@@ -73,7 +73,7 @@
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
         }
 
         .logo-container img {
@@ -83,27 +83,16 @@
             object-fit: contain;
         }
 
-        .brand-text {
-            display: flex;
-            flex-direction: column;
-        }
-
         .brand-text h1 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 700;
             background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 50%, var(--gold-dark) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .brand-text span {
-            color: var(--text-gray);
-            font-size: 0.9rem;
             letter-spacing: 3px;
-            text-transform: uppercase;
+            white-space: nowrap;
         }
 
         .controls {
@@ -527,6 +516,11 @@
                 flex-direction: column;
             }
             
+            .brand-text h1 {
+                font-size: 1.5rem;
+                letter-spacing: 2px;
+            }
+            
             .controls {
                 width: 100%;
                 justify-content: center;
@@ -566,8 +560,7 @@
                     1885
                 </div>
                 <div class="brand-text">
-                    <h1 data-en="1885 CAR SERVICE" data-ar="١٨٨٥ كار سيرفيس">1885 CAR SERVICE</h1>
-                    <span data-en="CENTRE" data-ar="سنتر">CENTRE</span>
+                    <h1 data-en="1885 CAR SERVICE CENTRE" data-ar="١٨٨٥ كار سيرفيس سنتر">1885 CAR SERVICE CENTRE</h1>
                 </div>
             </div>
             <div class="controls">
